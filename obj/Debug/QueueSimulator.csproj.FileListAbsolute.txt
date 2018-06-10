@@ -1,14 +1,6 @@
-C:\Users\Warda\Desktop\QueueSimulator\QueueSimulator\bin\Debug\QueueSimulator.exe.config
-C:\Users\Warda\Desktop\QueueSimulator\QueueSimulator\bin\Debug\QueueSimulator.exe
-C:\Users\Warda\Desktop\QueueSimulator\QueueSimulator\bin\Debug\QueueSimulator.pdb
-C:\Users\Warda\Desktop\QueueSimulator\QueueSimulator\obj\Debug\QueueSimulator.csprojResolveAssemblyReference.cache
-C:\Users\Warda\Desktop\QueueSimulator\QueueSimulator\obj\Debug\QueueSimulator.csproj.CoreCompileInputs.cache
-C:\Users\Warda\Desktop\QueueSimulator\QueueSimulator\obj\Debug\QueueSimulator.exe
-C:\Users\Warda\Desktop\QueueSimulator\QueueSimulator\obj\Debug\QueueSimulator.pdb
 C:\Users\Warda\Desktop\Projekt\QueueSimulator\bin\Debug\QueueSimulator.exe.config
 C:\Users\Warda\Desktop\Projekt\QueueSimulator\bin\Debug\QueueSimulator.exe
 C:\Users\Warda\Desktop\Projekt\QueueSimulator\bin\Debug\QueueSimulator.pdb
-C:\Users\Warda\Desktop\Projekt\QueueSimulator\obj\Debug\QueueSimulator.csprojResolveAssemblyReference.cache
 C:\Users\Warda\Desktop\Projekt\QueueSimulator\obj\Debug\QueueSimulator.csproj.CoreCompileInputs.cache
 C:\Users\Warda\Desktop\Projekt\QueueSimulator\obj\Debug\QueueSimulator.exe
 C:\Users\Warda\Desktop\Projekt\QueueSimulator\obj\Debug\QueueSimulator.pdb

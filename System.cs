@@ -6,14 +6,15 @@ namespace QueueSimulator
 {
 	public class System
 	{
-		public double Lambda = 5;
-		public double Mi = 20;
+		public string PoissonOrDeterministic = null;
+		public double Lambda = -1;
+		public double Mi = -1;
 		public double Time = 0;
 		public double TimeOfComingOut = 0;
 		public double TimeOfComingOutOfPreviousPacket = 0;
 		public bool IsSystemOccupied = false;
 		public double NumberOfPacket = 0;
-		public double NumberOfPackets = 100000;
+		public double NumberOfPackets = -1;
 		public double TimeInSystem = 0;
 		public double AllTimesInSystem = 0;
 		public int IterationsForSystem = 0;
@@ -23,13 +24,69 @@ namespace QueueSimulator
 		public bool IsFirst = true;
 		public double StartTime = 0;
 		public double CountingTime = 0;
-		public Random random = new Random();
+		public Random random = new Random(DateTime.Now.TimeOfDay.Milliseconds);
 
 		public void Simulation()
 		{
+			while (NumberOfPackets <= 0)
+			{
+				Console.WriteLine("Enter number of packets.");
+				try
+				{
+					NumberOfPackets = Int32.Parse(Console.ReadLine());
+				}
+				catch (Exception)
+				{
+
+				}
+			}
+
+			while (Lambda <= 0)
+			{
+				Console.WriteLine("Enter Lambda value.");
+				try
+				{
+					Lambda = Double.Parse(Console.ReadLine());
+				}
+				catch (Exception)
+				{
+
+				}
+			}
+
+			while (Mi <= 0)
+			{
+				Console.WriteLine("Enter Mi value.");
+				try
+				{
+					Mi = Double.Parse(Console.ReadLine());
+				}
+				catch (Exception)
+				{
+
+				}
+			}
+
+			while (PoissonOrDeterministic != "a" && PoissonOrDeterministic != "b")
+			{
+				Console.WriteLine("Enter a for Poisson and b for deterministic");
+				string temp = Console.ReadLine();
+				if (temp == "a")
+					PoissonOrDeterministic = "a";
+				else if (temp == "b")
+					PoissonOrDeterministic = "b";
+				else { }
+			}
+
+			Console.WriteLine("Simulation in progres...");
 			Queue queue = new Queue();
 			Event Event = null;
-			Time = GenerateEventTime(random.NextDouble(), Lambda);
+
+			if (PoissonOrDeterministic == "a")
+				Time = GenerateEventTime(random.NextDouble(), Lambda);
+			else if (PoissonOrDeterministic == "b")
+				Time = GenerateEventTimeConstantIncome(random.NextDouble(), Lambda);
+
 			queue.PutEvent(GenerateEvent(EventType.Incoming, Time)); //PUT pierwszego zdarzenia
 
 			while (NumberOfPacket < NumberOfPackets)
@@ -102,7 +159,7 @@ namespace QueueSimulator
 				"T = " + (AllTimesInSystem / IterationsForSystem) + Environment.NewLine +
 				"W = " + (AllTimesSpentInQueue / IterationsForQueue) + Environment.NewLine;
 			
-			File.WriteAllText(@"C:\Users\Warda\Desktop\Projekt\result.txt", text);
+			File.WriteAllText(@"C:\Users\" + Environment.UserName + @"\Desktop\result.txt", text);
 
 			Console.WriteLine("Average value of packets in system: " + AllTimesInSystem / CountingTime);
 			Console.WriteLine("Average value of packets in queue: " + AllTimesSpentInQueue / CountingTime);
@@ -116,7 +173,12 @@ namespace QueueSimulator
 			Event Event = queue.GetEvent();
 			Time = Event.ComingTime;
 			if (Event.EventType == EventType.Incoming)
-				queue.PutEvent(GenerateEvent(EventType.Incoming, Time + GenerateEventTime(random.NextDouble(), Lambda)));
+			{
+				if (PoissonOrDeterministic == "a")
+					queue.PutEvent(GenerateEvent(EventType.Incoming, Time + GenerateEventTime(random.NextDouble(), Lambda)));
+				else if (PoissonOrDeterministic == "b")
+					queue.PutEvent(GenerateEvent(EventType.Incoming, Time + GenerateEventTimeConstantIncome(random.NextDouble(), Lambda)));
+			}
 			NumberOfPacket++;
 			return Event;
 		}
